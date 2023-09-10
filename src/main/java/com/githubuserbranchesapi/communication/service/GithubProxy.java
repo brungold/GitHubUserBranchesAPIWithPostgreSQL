@@ -1,5 +1,6 @@
-package com.githubuserbranchesapi.communication;
+package com.githubuserbranchesapi.communication.service;
 
+import com.githubuserbranchesapi.communication.dto.GithubUserNameReposeDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

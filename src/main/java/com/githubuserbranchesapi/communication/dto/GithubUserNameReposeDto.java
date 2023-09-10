@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.communication;
+package com.githubuserbranchesapi.communication.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
