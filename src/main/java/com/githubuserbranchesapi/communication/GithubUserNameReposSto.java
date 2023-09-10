@@ -1,4 +1,7 @@
 package com.githubuserbranchesapi.communication;
 
-public record GithubUserNameReposSto() {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record GithubUserNameReposSto(String name) {
 }
