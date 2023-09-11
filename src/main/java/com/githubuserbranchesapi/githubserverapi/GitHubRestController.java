@@ -24,11 +24,10 @@ public class GitHubRestController {
     }
 
 
-
     @GetMapping("/{username}")
     public ResponseEntity<List<RepositoryResponseDto>> getUserRepositories(@PathVariable String username, @RequestHeader("Accept") String acceptHeader) {
         if (!acceptHeader.equalsIgnoreCase("application/json")) {
-            throw new RuntimeException;
+            throw new RuntimeException("Invalid Accept header");
         }
         List<GithubUserNameReposeDto> userRepos = githubClient.getUserRepos(username);
         List<String> repoNames = githubService.getRepoNames(userRepos);
