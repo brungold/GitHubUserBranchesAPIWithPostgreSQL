@@ -11,10 +11,11 @@ import java.util.List;
 public class GitHubRestController {
 
     @GetMapping("/{username}")
-    public ResponseEntity<List<RepositoryDto>> getUserRepositories(@PathVariable String username, @RequestHeader("Accept") String acceptHeader) {
+    public ResponseEntity<List<RepositoryResponseDto>> getUserRepositories(@PathVariable String username, @RequestHeader("Accept") String acceptHeader) {
         if (!acceptHeader.equalsIgnoreCase("application/json")) {
-            return ResponseEntity.badRequest().body("Invalid Accept header. Only 'application/json' is supported.");
+            throw new RuntimeException;
+
         }
-        return ;
+        return List<RepositoryResponseDto>;
     }
 }
