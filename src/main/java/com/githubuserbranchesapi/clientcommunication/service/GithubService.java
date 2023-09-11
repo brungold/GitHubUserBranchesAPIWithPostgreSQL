@@ -16,9 +16,7 @@ public class GithubService {
         this.githubClient = githubClient;
     }
 
-    public List<String> getRepoNames(String username) {
-        List<GithubUserNameReposeDto> repos = githubClient.getUserRepos(username);
-
+    public List<String> getRepoNames(List<GithubUserNameReposeDto> repos) {
         List<String> repoNames = repos.stream()
                 .map(GithubUserNameReposeDto::name)
                 .collect(Collectors.toList());
