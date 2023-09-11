@@ -1,6 +1,7 @@
-package com.githubuserbranchesapi.communication.service;
+package com.githubuserbranchesapi.clientcommunication.service;
 
-import com.githubuserbranchesapi.communication.dto.GithubUserNameReposeDto;
+import com.githubuserbranchesapi.clientcommunication.GithubProxy;
+import com.githubuserbranchesapi.clientcommunication.dto.GithubUserNameReposeDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
