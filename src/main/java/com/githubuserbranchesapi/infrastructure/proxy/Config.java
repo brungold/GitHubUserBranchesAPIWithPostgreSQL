@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.clientcommunication;
+package com.githubuserbranchesapi.infrastructure.proxy;
 
 import feign.codec.Decoder;
 import feign.jackson.JacksonDecoder;

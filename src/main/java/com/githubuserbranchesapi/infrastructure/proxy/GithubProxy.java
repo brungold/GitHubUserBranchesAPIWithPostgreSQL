@@ -1,7 +1,7 @@
-package com.githubuserbranchesapi.clientcommunication;
+package com.githubuserbranchesapi.infrastructure.proxy;
 
-import com.githubuserbranchesapi.clientcommunication.dto.GetGithubBranchResponseDto;
-import com.githubuserbranchesapi.clientcommunication.dto.GithubUserNameReposeDto;
+import com.githubuserbranchesapi.domain.dto.GetGithubBranchResponseDto;
+import com.githubuserbranchesapi.domain.dto.GithubUserNameReposeDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

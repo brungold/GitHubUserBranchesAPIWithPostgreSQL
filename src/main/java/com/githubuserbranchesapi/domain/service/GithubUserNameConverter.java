@@ -1,22 +1,22 @@
-package com.githubuserbranchesapi.clientcommunication.service;
+package com.githubuserbranchesapi.domain.service;
 
-import com.githubuserbranchesapi.clientcommunication.GithubProxy;
-import com.githubuserbranchesapi.clientcommunication.dto.GithubUserNameReposeDto;
+import com.githubuserbranchesapi.infrastructure.proxy.GithubProxy;
+import com.githubuserbranchesapi.domain.dto.GithubUserNameReposeDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class GithubService {
+public class GithubUserNameConverter {
 
     private final GithubProxy githubClient;
 
-    public GithubService(GithubProxy githubClient) {
+    public GithubUserNameConverter(GithubProxy githubClient) {
         this.githubClient = githubClient;
     }
 
-    public List<String> getRepoNames(List<GithubUserNameReposeDto> repos) {
+    public List<String> convertToRepoNames(List<GithubUserNameReposeDto> repos) {
         List<String> repoNames = repos.stream()
                 .map(GithubUserNameReposeDto::name)
                 .collect(Collectors.toList());

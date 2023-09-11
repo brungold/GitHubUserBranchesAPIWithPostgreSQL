@@ -1,4 +1,6 @@
-package com.githubuserbranchesapi.githubserverapi;
+package com.githubuserbranchesapi.domain.dto;
+
+import com.githubuserbranchesapi.domain.dto.BranchInfo;
 
 import java.util.List;
 
