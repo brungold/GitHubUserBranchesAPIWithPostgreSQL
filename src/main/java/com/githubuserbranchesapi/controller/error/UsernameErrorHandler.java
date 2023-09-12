@@ -13,6 +13,6 @@ public class UsernameErrorHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorUsernameResponseDto handleException(UsernameNotFoundException exception) {
         log.warn("UsernameNotFoundException while accessing username");
-        return new ErrorUsernameResponseDto("User not found", HttpStatus.NOT_FOUND);
+        return new ErrorUsernameResponseDto(HttpStatus.NOT_FOUND, "User not found");
     }
 }
