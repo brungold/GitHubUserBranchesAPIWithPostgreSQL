@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice(assignableTypes = GitHubRestController.class)
 @Log4j2
 public class InvalidHeaderHandler {
-    @ExceptionHandler(GitHubRestController.class)
+    @ExceptionHandler(InvalidAcceptHeaderException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public InvalidAcceptHeaderResponseDto handleHeaderException(InvalidAcceptHeaderException exception){

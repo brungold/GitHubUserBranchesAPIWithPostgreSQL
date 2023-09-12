@@ -32,8 +32,7 @@ public class GitHubRestController {
 
     @GetMapping("/{username}")
     public ResponseEntity<List<RepositoryResponseDto>> getUserRepositories(@PathVariable String username, @RequestHeader("Accept") String acceptHeader) {
-        if
-        (!acceptHeader.equalsIgnoreCase("application/json")) {
+        if (!acceptHeader.equalsIgnoreCase("application/json")) {
             throw new InvalidAcceptHeaderException("Invalid Accept header");
         }
 
