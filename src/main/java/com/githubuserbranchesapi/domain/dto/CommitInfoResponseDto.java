@@ -3,5 +3,5 @@ package com.githubuserbranchesapi.domain.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record Commit(String sha) {
+public record CommitInfoResponseDto(String sha) {
 }

@@ -1,6 +1,6 @@
 package com.githubuserbranchesapi.domain.dto;
 
-public record BranchInfo(
+public record BranchInfoResponseDto(
         String branchName,
         String lastCommitSHA
 ) {
