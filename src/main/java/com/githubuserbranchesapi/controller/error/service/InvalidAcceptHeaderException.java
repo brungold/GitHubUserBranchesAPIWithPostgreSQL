@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.controller.error;
+package com.githubuserbranchesapi.controller.error.service;
 
 public class InvalidAcceptHeaderException extends RuntimeException {
     public InvalidAcceptHeaderException(String message) {

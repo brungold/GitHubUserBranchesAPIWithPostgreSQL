@@ -1,7 +1,7 @@
 package com.githubuserbranchesapi.controller;
 
-import com.githubuserbranchesapi.controller.error.InvalidAcceptHeaderException;
-import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
+import com.githubuserbranchesapi.controller.error.service.InvalidAcceptHeaderException;
+import com.githubuserbranchesapi.controller.error.service.UsernameNotFoundException;
 import com.githubuserbranchesapi.infrastructure.proxy.GithubProxy;
 import com.githubuserbranchesapi.domain.dto.GetGithubBranchResponseDto;
 import com.githubuserbranchesapi.domain.dto.GithubUserNameReposeDto;
@@ -32,7 +32,7 @@ public class GitHubRestController {
 
     @GetMapping("/{username}")
     public ResponseEntity<List<RepositoryResponseDto>> getUserRepositories(@PathVariable String username, @RequestHeader("Accept") String acceptHeader) {
-        if (!acceptHeader.equalsIgnoreCase("application/json")) {
+        if (acceptHeader.equals("application/xml")) {
             throw new InvalidAcceptHeaderException("Invalid Accept header");
         }
 
