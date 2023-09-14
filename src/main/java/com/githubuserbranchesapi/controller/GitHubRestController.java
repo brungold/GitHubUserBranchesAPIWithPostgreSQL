@@ -21,13 +21,16 @@ import java.util.stream.Collectors;
 @Log4j2
 public class GitHubRestController {
     private final GithubUserNameConverter githubService;
-
     private final GithubProxy githubClient;
+    private final GitHubRestControllerService gitHubRestControllerService;
 
-    public GitHubRestController(GithubProxy githubClient, GithubUserNameConverter githubService) {
-        this.githubClient = githubClient;
+    public GitHubRestController(GithubUserNameConverter githubService, GithubProxy githubClient, GitHubRestControllerService gitHubRestControllerService) {
         this.githubService = githubService;
+        this.githubClient = githubClient;
+        this.gitHubRestControllerService = gitHubRestControllerService;
     }
+
+
 
 
     @GetMapping("/{username}")
@@ -44,35 +47,10 @@ public class GitHubRestController {
         }
 
         List<String> repoNames = githubService.convertToRepoNames(userRepos);
-        List<RepositoryResponseDto> repositoryResponseList = fetchRepositoryResponses(username, repoNames);
+        List<RepositoryResponseDto> repositoryResponseList = gitHubRestControllerService.fetchRepositoryResponses(username, repoNames);
 
         return ResponseEntity.ok(repositoryResponseList);
     }
 
-    private List<RepositoryResponseDto> fetchRepositoryResponses(String username, List<String> repoNames) {
-        List<RepositoryResponseDto> repositoryResponseList = new ArrayList<>();
 
-        for (String repoName : repoNames) {
-            List<GetGithubBranchResponseDto> branches = fetchBranches(username, repoName);
-            List<BranchInfoResponseDto> branchInfoList = createBranchInfoList(branches);
-            RepositoryResponseDto repositoryResponseDto = createRepositoryResponse(repoName, username, branchInfoList);
-            repositoryResponseList.add(repositoryResponseDto);
-        }
-
-        return repositoryResponseList;
-    }
-
-    private List<GetGithubBranchResponseDto> fetchBranches(String username, String repoName) {
-        return githubClient.getBranches(username, repoName);
-    }
-
-    private List<BranchInfoResponseDto> createBranchInfoList(List<GetGithubBranchResponseDto> branches) {
-        return branches.stream()
-                .map(branch -> new BranchInfoResponseDto(branch.name(), branch.commit().sha()))
-                .collect(Collectors.toList());
-    }
-
-    private RepositoryResponseDto createRepositoryResponse(String repoName, String username, List<BranchInfoResponseDto> branchInfoList) {
-        return new RepositoryResponseDto(repoName, username, branchInfoList);
-    }
 }
