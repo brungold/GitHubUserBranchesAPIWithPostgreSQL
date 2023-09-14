@@ -17,14 +17,4 @@ public class Config {
     public Decoder feignDecoder() {
         return new JacksonDecoder();
     }
-
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new XmlMapper();
-    }
-
-    @Bean
-    public MappingJackson2XmlHttpMessageConverter mappingJackson2XmlHttpMessageConverter(ObjectMapper objectMapper) {
-        return new MappingJackson2XmlHttpMessageConverter(objectMapper);
-    }
 }

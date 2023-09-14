@@ -30,6 +30,7 @@ public class GitHubRestController {
         this.gitHubRestControllerService = gitHubRestControllerService;
     }
 
+
     @GetMapping("/{username}")
     public ResponseEntity<List<RepositoryResponseDto>> getUserRepositories(@PathVariable String username, @RequestHeader("Accept") String acceptHeader) {
         if (acceptHeader.equals("application/xml")) {
@@ -46,8 +47,7 @@ public class GitHubRestController {
         List<String> repoNames = githubService.convertToRepoNames(userRepos);
         List<RepositoryResponseDto> repositoryResponseList = gitHubRestControllerService.fetchRepositoryResponses(username, repoNames);
 
+        log.info(repositoryResponseList);
         return ResponseEntity.ok(repositoryResponseList);
     }
-
-
 }
