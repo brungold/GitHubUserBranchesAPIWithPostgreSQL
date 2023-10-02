@@ -1,7 +1,7 @@
 package com.githubuserbranchesapi.controller.error;
 
 import com.githubuserbranchesapi.controller.GitHubRestController;
-import com.githubuserbranchesapi.controller.dto.InvalidAcceptHeaderResponseDto;
+import com.githubuserbranchesapi.controller.error.dto.InvalidAcceptHeaderResponseDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
