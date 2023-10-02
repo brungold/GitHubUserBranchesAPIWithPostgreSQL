@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.controller.error.service;
+package com.githubuserbranchesapi.controller.error;
 
 import com.githubuserbranchesapi.controller.GitHubRestController;
 import com.githubuserbranchesapi.controller.dto.ErrorUsernameResponseDto;
