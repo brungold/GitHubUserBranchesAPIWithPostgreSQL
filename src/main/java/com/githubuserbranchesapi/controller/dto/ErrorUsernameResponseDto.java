@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.controller.error.dto;
+package com.githubuserbranchesapi.controller.dto;
 
 import org.springframework.http.HttpStatus;
 
