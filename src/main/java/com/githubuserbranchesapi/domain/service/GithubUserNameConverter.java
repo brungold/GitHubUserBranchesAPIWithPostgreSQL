@@ -1,7 +1,7 @@
 package com.githubuserbranchesapi.domain.service;
 
 import com.githubuserbranchesapi.infrastructure.proxy.GithubProxy;
-import com.githubuserbranchesapi.domain.dto.GithubUserNameReposeDto;
+import com.githubuserbranchesapi.domain.dto.Owner;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +16,9 @@ public class GithubUserNameConverter {
         this.githubClient = githubClient;
     }
 
-    public List<String> convertToRepoNames(List<GithubUserNameReposeDto> repos) {
+    public List<String> convertToRepoNames(List<Owner> repos) {
         List<String> repoNames = repos.stream()
-                .map(GithubUserNameReposeDto::name)
+                .map(Owner::login)
                 .collect(Collectors.toList());
 
         return repoNames;

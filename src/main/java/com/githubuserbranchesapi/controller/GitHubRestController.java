@@ -3,7 +3,7 @@ package com.githubuserbranchesapi.controller;
 import com.githubuserbranchesapi.controller.error.InvalidAcceptHeaderException;
 import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
 import com.githubuserbranchesapi.infrastructure.proxy.GithubProxy;
-import com.githubuserbranchesapi.domain.dto.GithubUserNameReposeDto;
+import com.githubuserbranchesapi.domain.dto.Owner;
 import com.githubuserbranchesapi.domain.service.GithubUserNameConverter;
 import com.githubuserbranchesapi.domain.dto.RepositoryResponseDto;
 import feign.FeignException;
@@ -33,7 +33,7 @@ public class GitHubRestController {
             throw new InvalidAcceptHeaderException("Invalid Accept header, only JSON acceptable.");
         }
 
-        List<GithubUserNameReposeDto> userRepos;
+        List<Owner> userRepos;
         try {
             userRepos = githubClient.getUserRepos(username);
         } catch (FeignException ex) {
