@@ -1,12 +1,14 @@
 package com.githubuserbranchesapi.controller;
 
 import com.githubuserbranchesapi.client.GithubProxy;
+import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
 import com.githubuserbranchesapi.domain.dto.request.CreatedRequestRepoDto;
 import com.githubuserbranchesapi.domain.dto.request.PartiallyUpdateRepoRequestDto;
 import com.githubuserbranchesapi.domain.dto.request.UpdateRepoRequestDto;
 import com.githubuserbranchesapi.domain.dto.response.*;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.domain.service.*;
+import feign.FeignException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -34,7 +36,12 @@ public class GitHubRestController {
 
     @GetMapping("/username/{userName}")
     public ResponseEntity<List<RepoResponseDto>> getAllRepositoriesNamesByUserName(@PathVariable String userName) {
-        List<RepoResponseDto> allRepositoriesByUserName = githubService.getAllRepositoryNames(userName);
+        List<RepoResponseDto> allRepositoriesByUserName;
+        try {
+            allRepositoriesByUserName = githubService.getAllRepositoryNames(userName);
+        } catch (FeignException ex) {
+            throw new UsernameNotFoundException(userName);
+        }
         return ResponseEntity.ok(allRepositoriesByUserName);
     }
 
