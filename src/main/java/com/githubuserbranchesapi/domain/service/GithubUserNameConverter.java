@@ -16,11 +16,11 @@ public class GithubUserNameConverter {
         this.githubClient = githubClient;
     }
 
-    public List<String> convertToRepoNames(List<RepoName> repos) {
-        List<String> repoNames = repos.stream()
-                .map(RepoName::login)
-                .collect(Collectors.toList());
-
-        return repoNames;
-    }
+//    public List<String> convertToRepoNames(List<RepoName> repos) {
+//        List<String> repoNames = repos.stream()
+//                .map(RepoName::login)
+//                .collect(Collectors.toList());
+//
+//        return repoNames;
+//    }
 }
