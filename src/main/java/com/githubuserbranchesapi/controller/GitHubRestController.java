@@ -2,6 +2,7 @@ package com.githubuserbranchesapi.controller;
 
 import com.githubuserbranchesapi.client.GithubProxy;
 import com.githubuserbranchesapi.domain.dto.CreatedRepoResponseDto;
+import com.githubuserbranchesapi.domain.dto.DeleteRepositoryResponseDto;
 import com.githubuserbranchesapi.domain.dto.RepoResponseDto;
 import com.githubuserbranchesapi.domain.dto.CreatedRequestRepoDto;
 import com.githubuserbranchesapi.domain.model.Repo;
@@ -51,6 +52,10 @@ public class GitHubRestController {
         CreatedRepoResponseDto responseDto = mapFromRepoToCreatedRepoResponseDto(savedRepo);
         return ResponseEntity.ok(responseDto);
     }
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DeleteRepositoryResponseDto> delete(@PathVariable Long id) {
+        githubService.deleteById(id);
+        DeleteRepositoryResponseDto deleteDto = mapFromRepoToDeleteRepositoryResponseDto(id);
+        return ResponseEntity.ok(deleteDto);
+    }
 }

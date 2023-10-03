@@ -20,4 +20,5 @@ public interface GithubRepoRepository extends Repository<Repo, Long>{
     Repo save(Repo repo);
 
     void deleteById(Long id);
+    boolean existsById(Long id);
 }

@@ -65,4 +65,14 @@ public class GithubService {
         log.info("Adding a new repository " + repo);
         return githubRepoRepository.save(repo);
     }
+    public void existsById(Long id) {
+        if(!githubRepoRepository.existsById(id)){
+            throw new UsernameNotFoundException("Repository with id " + id + " not found");
+        }
+    }
+    public void deleteById(Long id){
+        githubRepoRepository.existsById(id);
+        log.info("deleting repository by id " + id);
+        githubRepoRepository.deleteById(id);
+    }
 }
