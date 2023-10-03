@@ -1,11 +1,9 @@
-package com.githubuserbranchesapi.controller;
+package com.githubuserbranchesapi.domain.service;
 
-import com.githubuserbranchesapi.domain.dto.BranchInfoResponseDto;
+import com.githubuserbranchesapi.client.BranchInfoResponseDto;
 import com.githubuserbranchesapi.domain.dto.GetGithubBranchResponseDto;
 import com.githubuserbranchesapi.domain.dto.RepositoryResponseDto;
-import com.githubuserbranchesapi.domain.model.Repo;
-import com.githubuserbranchesapi.infrastructure.proxy.GithubProxy;
-import com.githubuserbranchesapi.repository.GithubRepoRepository;
+import com.githubuserbranchesapi.client.GithubProxy;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class GitHubRestControllerService {
         this.githubClient = githubClient;
     }
 
-    public List<RepositoryResponseDto> fetchRepositoryResponses(String username, List<String> repoNames) {
+    public List<RepositoryResponseDto> fetchAllRepositoryBranches(String username, List<String> repoNames) {
         return repoNames.stream()
                 .map(repoName -> {
                     List<GetGithubBranchResponseDto> branches = githubClient.getBranches(username, repoName);

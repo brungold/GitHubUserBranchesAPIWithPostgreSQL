@@ -8,7 +8,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "song")
 public class Repo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -20,6 +22,7 @@ public class Repo {
     @NotNull
     String name;
     public Repo(){
+
     }
 
     public Repo(String owner, String name) {

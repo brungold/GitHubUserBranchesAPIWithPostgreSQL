@@ -2,8 +2,9 @@ package com.githubuserbranchesapi.controller;
 
 import com.githubuserbranchesapi.controller.error.InvalidAcceptHeaderException;
 import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
-import com.githubuserbranchesapi.infrastructure.proxy.GithubProxy;
-import com.githubuserbranchesapi.domain.dto.Owner;
+import com.githubuserbranchesapi.client.GithubProxy;
+import com.githubuserbranchesapi.client.Owner;
+import com.githubuserbranchesapi.domain.service.GitHubRestControllerService;
 import com.githubuserbranchesapi.domain.service.GithubUserNameConverter;
 import com.githubuserbranchesapi.domain.dto.RepositoryResponseDto;
 import feign.FeignException;
@@ -41,7 +42,7 @@ public class GitHubRestController {
         }
 
         List<String> repoNames = githubService.convertToRepoNames(userRepos);
-        List<RepositoryResponseDto> repositoryResponseList = gitHubRestControllerService.fetchRepositoryResponses(username, repoNames);
+        List<RepositoryResponseDto> repositoryResponseList = gitHubRestControllerService.fetchAllRepositoryBranches(username, repoNames);
 
         log.info(repositoryResponseList);
         return ResponseEntity.ok(repositoryResponseList);

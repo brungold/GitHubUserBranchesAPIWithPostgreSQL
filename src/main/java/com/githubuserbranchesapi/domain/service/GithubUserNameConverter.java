@@ -1,7 +1,7 @@
 package com.githubuserbranchesapi.domain.service;
 
-import com.githubuserbranchesapi.infrastructure.proxy.GithubProxy;
-import com.githubuserbranchesapi.domain.dto.Owner;
+import com.githubuserbranchesapi.client.GithubProxy;
+import com.githubuserbranchesapi.client.Owner;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

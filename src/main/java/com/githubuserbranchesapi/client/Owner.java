@@ -1,7 +1,7 @@
-package com.githubuserbranchesapi.domain.dto;
+package com.githubuserbranchesapi.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record Commit(String sha) {
+public record Owner(String login) {
 }

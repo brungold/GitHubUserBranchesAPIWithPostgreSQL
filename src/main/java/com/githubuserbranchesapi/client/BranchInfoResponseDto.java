@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.domain.dto;
+package com.githubuserbranchesapi.client;
 
 public record BranchInfoResponseDto(
         String branchName,
