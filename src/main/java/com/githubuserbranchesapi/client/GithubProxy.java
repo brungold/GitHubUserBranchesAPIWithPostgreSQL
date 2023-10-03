@@ -1,7 +1,7 @@
 package com.githubuserbranchesapi.client;
 
-import com.githubuserbranchesapi.domain.dto.GetBranchResponseDto;
-import com.githubuserbranchesapi.domain.dto.GithubRepoResponseDto;
+import com.githubuserbranchesapi.client.dto.GetBranchResponseDto;
+import com.githubuserbranchesapi.domain.dto.response.GithubRepoResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

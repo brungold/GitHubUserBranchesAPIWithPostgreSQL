@@ -2,8 +2,8 @@ package com.githubuserbranchesapi.domain.service;
 
 import com.githubuserbranchesapi.client.GithubProxy;
 import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
-import com.githubuserbranchesapi.domain.dto.GithubRepoResponseDto;
-import com.githubuserbranchesapi.domain.dto.RepoResponseDto;
+import com.githubuserbranchesapi.domain.dto.response.GithubRepoResponseDto;
+import com.githubuserbranchesapi.domain.dto.response.RepoResponseDto;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.repository.GithubRepoRepository;
 import lombok.AllArgsConstructor;

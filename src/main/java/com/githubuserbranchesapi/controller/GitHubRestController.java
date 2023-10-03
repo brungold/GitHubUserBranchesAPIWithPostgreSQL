@@ -1,7 +1,10 @@
 package com.githubuserbranchesapi.controller;
 
 import com.githubuserbranchesapi.client.GithubProxy;
-import com.githubuserbranchesapi.domain.dto.*;
+import com.githubuserbranchesapi.domain.dto.request.CreatedRequestRepoDto;
+import com.githubuserbranchesapi.domain.dto.request.PartiallyUpdateRepoRequestDto;
+import com.githubuserbranchesapi.domain.dto.request.UpdateRepoRequestDto;
+import com.githubuserbranchesapi.domain.dto.response.*;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.domain.service.GithubService;
 import jakarta.validation.Valid;

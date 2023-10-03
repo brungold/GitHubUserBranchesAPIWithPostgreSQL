@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.domain.dto;
+package com.githubuserbranchesapi.domain.dto.request;
 
 public record PartiallyUpdateRepoRequestDto(String owner, String name) {
 }

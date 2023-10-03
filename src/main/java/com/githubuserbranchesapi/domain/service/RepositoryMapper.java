@@ -1,6 +1,9 @@
 package com.githubuserbranchesapi.domain.service;
 
-import com.githubuserbranchesapi.domain.dto.*;
+import com.githubuserbranchesapi.domain.dto.request.CreatedRequestRepoDto;
+import com.githubuserbranchesapi.domain.dto.request.PartiallyUpdateRepoRequestDto;
+import com.githubuserbranchesapi.domain.dto.request.UpdateRepoRequestDto;
+import com.githubuserbranchesapi.domain.dto.response.*;
 import com.githubuserbranchesapi.domain.model.Repo;
 import org.springframework.http.HttpStatus;
 

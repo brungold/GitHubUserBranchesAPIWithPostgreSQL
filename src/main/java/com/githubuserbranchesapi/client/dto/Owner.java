@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.client;
+package com.githubuserbranchesapi.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

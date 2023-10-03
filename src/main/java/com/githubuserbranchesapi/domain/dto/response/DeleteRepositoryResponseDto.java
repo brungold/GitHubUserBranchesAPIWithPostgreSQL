@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.domain.dto;
+package com.githubuserbranchesapi.domain.dto.response;
 
 import org.springframework.http.HttpStatus;
 
