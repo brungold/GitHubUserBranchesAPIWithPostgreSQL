@@ -3,9 +3,9 @@ package com.githubuserbranchesapi.controller;
 import com.githubuserbranchesapi.client.GithubProxy;
 import com.githubuserbranchesapi.domain.dto.CreatedRepoResponseDto;
 import com.githubuserbranchesapi.domain.dto.RepoResponseDto;
-import com.githubuserbranchesapi.domain.dto.RequestRepoDto;
+import com.githubuserbranchesapi.domain.dto.CreatedRequestRepoDto;
 import com.githubuserbranchesapi.domain.model.Repo;
-import com.githubuserbranchesapi.domain.service.RepositoryRetriever;
+import com.githubuserbranchesapi.domain.service.GithubService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.githubuserbranchesapi.domain.service.RepositoryMapper.*;
+
+
 @RestController
 @RequestMapping("/api/repo")
 @Log4j2
@@ -22,9 +25,6 @@ import java.util.List;
 public class GitHubRestController {
     private final GithubProxy githubClient;
     private final GithubService githubService;
-    private final RepositoryRetriever repositoryRetriever;
-
-
 
     @GetMapping("/username/{userName}")
     public ResponseEntity<List<RepoResponseDto>> getAllRepositoriesNamesByUserName(@PathVariable String userName) {
@@ -33,7 +33,7 @@ public class GitHubRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RepoResponseDto>> getAllRepositories(@PageableDefault(page = 0, size = 10)Pageable pageable){
+    public ResponseEntity<List<RepoResponseDto>> getAllRepositories(@PageableDefault(page = 0, size = 10) Pageable pageable) {
         List<RepoResponseDto> allRepositories = githubService.getAll(pageable);
         return ResponseEntity.ok(allRepositories);
     }
@@ -45,7 +45,12 @@ public class GitHubRestController {
     }
 
     @PostMapping
-    public ResponseEntity<CreatedRepoResponseDto> postRepo(@RequestBody RequestRepoDto requestRepoDto){
-
+    public ResponseEntity<CreatedRepoResponseDto> postRepo(@RequestBody CreatedRequestRepoDto requestRepoDto) {
+        Repo repo = mapFromCreatedRequestRepoDtoToRepo(requestRepoDto);
+        Repo savedRepo = githubService.addRepo(repo);
+        CreatedRepoResponseDto responseDto = mapFromRepoToCreatedRepoResponseDto(savedRepo);
+        return ResponseEntity.ok(responseDto);
     }
+
+
 }

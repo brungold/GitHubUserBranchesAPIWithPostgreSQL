@@ -1,11 +1,10 @@
-package com.githubuserbranchesapi.controller;
+package com.githubuserbranchesapi.domain.service;
 
 import com.githubuserbranchesapi.client.GithubProxy;
 import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
 import com.githubuserbranchesapi.domain.dto.GithubRepoResponseDto;
 import com.githubuserbranchesapi.domain.dto.RepoResponseDto;
 import com.githubuserbranchesapi.domain.model.Repo;
-import com.githubuserbranchesapi.domain.service.RepositoryRetriever;
 import com.githubuserbranchesapi.repository.GithubRepoRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -60,5 +59,10 @@ public class GithubService {
                 .orElseThrow(() -> new UsernameNotFoundException("Repository with id " + id + "not foud"));
         RepoResponseDto dto = new RepoResponseDto(repo.getId(), repo.getOwner(), repo.getName());
         return dto;
+    }
+
+    public Repo addRepo(Repo repo){
+        log.info("Adding a new repository " + repo);
+        return githubRepoRepository.save(repo);
     }
 }
