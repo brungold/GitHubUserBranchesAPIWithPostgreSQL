@@ -1,12 +1,10 @@
 package com.githubuserbranchesapi.controller;
 
 import com.githubuserbranchesapi.client.GithubProxy;
-import com.githubuserbranchesapi.domain.dto.CreatedRepoResponseDto;
-import com.githubuserbranchesapi.domain.dto.DeleteRepositoryResponseDto;
-import com.githubuserbranchesapi.domain.dto.RepoResponseDto;
-import com.githubuserbranchesapi.domain.dto.CreatedRequestRepoDto;
+import com.githubuserbranchesapi.domain.dto.*;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.domain.service.GithubService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Pageable;
@@ -58,4 +56,17 @@ public class GitHubRestController {
         DeleteRepositoryResponseDto deleteDto = mapFromRepoToDeleteRepositoryResponseDto(id);
         return ResponseEntity.ok(deleteDto);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UpdateRepoResponseDto> update(@PathVariable Long id,
+                                                        @RequestBody @Valid UpdateRepoRequestDto request){
+        Repo newRepo = mapFromUpdateRepoRequestDtotoRepo(request);
+        githubService.updateById(id, newRepo);
+        UpdateRepoResponseDto updateRepoResponseDto = mapFromRepoToUpdateRepoResponseDto(newRepo);
+        return ResponseEntity.ok(updateRepoResponseDto);
+    }
+
+
+
+
 }

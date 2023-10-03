@@ -75,4 +75,8 @@ public class GithubService {
         log.info("deleting repository by id " + id);
         githubRepoRepository.deleteById(id);
     }
+
+    public void updateById(Long id, Repo newRepo){
+        githubRepoRepository.updateById();
+    }
 }
