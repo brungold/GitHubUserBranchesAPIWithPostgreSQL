@@ -19,15 +19,22 @@ public class GitHubRestControllerService {
         this.githubClient = githubClient;
     }
 
-    public List<RepositoryResponseDto> fetchAllRepositoryBranches(String username, List<String> repoNames) {
-        return repoNames.stream()
-                .map(repoName -> {
-                    List<GetBranchResponseDto> branches = githubClient.getBranches(username, repoName);
-                    List<BranchInfoResponseDto> branchInfoList = branches.stream()
-                            .map(branch -> new BranchInfoResponseDto(branch.name(), branch.commit().sha()))
-                            .collect(Collectors.toList());
-                    return new RepositoryResponseDto(repoName, username, branchInfoList);
-                })
-                .collect(Collectors.toList());
-    }
+//    public List<RepositoryResponseDto> fetchAllRepositoryBranches(String username, List<String> repoNames) {
+//        return repoNames.stream()
+//                .map(repoName -> {
+//                    List<GetBranchResponseDto> branches = githubClient.getBranches(username, repoName);
+//                    List<BranchInfoResponseDto> branchInfoList = branches.stream()
+//                            .map(branch -> new BranchInfoResponseDto(branch.name(), branch.commit().sha()))
+//                            .collect(Collectors.toList());
+//                    return new RepositoryResponseDto(repoName, username, branchInfoList);
+//                })
+//                .collect(Collectors.toList());
+//    }
+    //    public List<String> convertToRepoNames(List<RepoName> repos) {
+//        List<String> repoNames = repos.stream()
+//                .map(RepoName::login)
+//                .collect(Collectors.toList());
+//
+//        return repoNames;
+//    }
 }

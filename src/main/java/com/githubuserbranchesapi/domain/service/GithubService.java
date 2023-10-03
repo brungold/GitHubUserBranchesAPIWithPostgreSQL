@@ -7,18 +7,20 @@ import com.githubuserbranchesapi.domain.dto.RequiredResponseDto;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.repository.GithubRepoRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @Log4j2
-public class Githubservice {
+public class GithubService {
     private final GithubProxy githubClient;
     private final GithubRepoRepository githubRepoRepository;
 
-    public Githubservice(GithubProxy githubClient, GithubRepoRepository githubRepoRepository) {
+    public GithubService(GithubProxy githubClient, GithubRepoRepository githubRepoRepository) {
         this.githubClient = githubClient;
         this.githubRepoRepository = githubRepoRepository;
     }
@@ -41,8 +43,16 @@ public class Githubservice {
                     .collect(Collectors.toList());
 
             return requiredResponseList;
-        }catch (RuntimeException ex) {
+        } catch (RuntimeException ex) {
             throw new UsernameNotFoundException(username);
         }
+    }
+    public List<RequiredResponseDto> getAll(Pageable pageable){
+        List<Repo> allRepo = githubRepoRepository.findAll(pageable);
+        List<RequiredResponseDto> dto = new ArrayList<>();
+        allRepo.forEach(rep -> {
+            dto.add(new RequiredResponseDto(rep.getId(), rep.getOwner(), rep.getName()));
+        });
+        return dto;
     }
 }
