@@ -1,9 +1,9 @@
-package com.githubuserbranchesapi.domain.service;
+package com.githubuserbranchesapi.controller;
 
 import com.githubuserbranchesapi.client.GithubProxy;
 import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
 import com.githubuserbranchesapi.domain.dto.GithubRepoResponseDto;
-import com.githubuserbranchesapi.domain.dto.RequiredResponseDto;
+import com.githubuserbranchesapi.domain.dto.RepoResponseDto;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.repository.GithubRepoRepository;
 import lombok.extern.log4j.Log4j2;
@@ -25,20 +25,20 @@ public class GithubService {
         this.githubRepoRepository = githubRepoRepository;
     }
 
-    public List<RequiredResponseDto> getAllRepositoryNames(String username) {
+    public List<RepoResponseDto> getAllRepositoryNames(String username) {
         try {
             //Pobieram listę repozytoriów użytkownika z API GitHub
             List<GithubRepoResponseDto> allUserRepositories = githubClient.getUserRepos(username);
 
             //Przetwarzamdane i zapisz je do bazy danych oraz zwróć listę RequiredResponseDto
-            List<RequiredResponseDto> requiredResponseList = allUserRepositories.stream()
+            List<RepoResponseDto> requiredResponseList = allUserRepositories.stream()
                     .map(repoDto -> {
                         //Zapisuje  informacje o repozytorium do bazy danych
                         Repo repo = new Repo(repoDto.owner().login(), repoDto.login());
                         Repo savedRepo = githubRepoRepository.save(repo);
 
                         //Tworze RequiredResponseDto na podstawie danych zapisanych w bazie danych
-                        return new RequiredResponseDto(savedRepo.getId(), savedRepo.getOwner(), savedRepo.getName());
+                        return new RepoResponseDto(savedRepo.getId(), savedRepo.getOwner(), savedRepo.getName());
                     })
                     .collect(Collectors.toList());
 
@@ -47,11 +47,11 @@ public class GithubService {
             throw new UsernameNotFoundException(username);
         }
     }
-    public List<RequiredResponseDto> getAll(Pageable pageable){
+    public List<RepoResponseDto> getAll(Pageable pageable){
         List<Repo> allRepo = githubRepoRepository.findAll(pageable);
-        List<RequiredResponseDto> dto = new ArrayList<>();
+        List<RepoResponseDto> dto = new ArrayList<>();
         allRepo.forEach(rep -> {
-            dto.add(new RequiredResponseDto(rep.getId(), rep.getOwner(), rep.getName()));
+            dto.add(new RepoResponseDto(rep.getId(), rep.getOwner(), rep.getName()));
         });
         return dto;
     }
