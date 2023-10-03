@@ -77,6 +77,7 @@ public class GithubService {
     }
 
     public void updateById(Long id, Repo newRepo){
-        githubRepoRepository.updateById();
+        githubRepoRepository.existsById(id);
+        githubRepoRepository.updateById(id, newRepo);
     }
 }
