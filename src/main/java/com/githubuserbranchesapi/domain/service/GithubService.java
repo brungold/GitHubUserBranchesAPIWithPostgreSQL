@@ -54,11 +54,9 @@ public class GithubService {
         return dto;
     }
 
-    public RepoResponseDto getById(Long id){
-        Repo repo = githubRepoRepository.findById(id)
+    public Repo getById(Long id){
+        return githubRepoRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException("Repository with id " + id + "not foud"));
-        RepoResponseDto dto = new RepoResponseDto(repo.getId(), repo.getOwner(), repo.getName());
-        return dto;
     }
 
     public Repo addRepo(Repo repo){
@@ -79,5 +77,23 @@ public class GithubService {
     public void updateById(Long id, Repo newRepo){
         githubRepoRepository.existsById(id);
         githubRepoRepository.updateById(id, newRepo);
+    }
+
+    public Repo updatePartiallyById(Long id, Repo repoFromRequest){
+        Repo repoFromDatabase = getById(id);
+        Repo.RepoBuilder builder = Repo.builder();
+        if (repoFromRequest.getName() != null){
+            builder.name(repoFromRequest.getName());
+        } else {
+            builder.name(repoFromDatabase.getName());
+        }
+        if (repoFromRequest.getOwner() != null){
+            builder.name(repoFromRequest.getOwner());
+        } else {
+            builder.name(repoFromDatabase.getOwner());
+        }
+        Repo toSave = builder.build();
+        updateById(id, toSave);
+        return toSave;
     }
 }

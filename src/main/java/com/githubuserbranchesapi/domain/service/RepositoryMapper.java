@@ -28,4 +28,13 @@ public class RepositoryMapper {
     public static UpdateRepoResponseDto mapFromRepoToUpdateRepoResponseDto(Repo newRepo) {
         return new UpdateRepoResponseDto(newRepo.getOwner(), newRepo.getName());
     }
+
+    public static Repo mapFromartiallyUpdateRepoRequestDtoToRepo(PartiallyUpdateRepoRequestDto dto) {
+        return new Repo(dto.owner(), dto.name());
+    }
+
+    public static PartiallyUpdateRepoResponseDto mapFromRepoToPartiallyUpdateRepoResponseDto(Repo repo) {
+        RepoResponseDto responseDto = mapFromRepoToRepoResponseDto(repo);
+        return new PartiallyUpdateRepoResponseDto(responseDto);
+    }
 }

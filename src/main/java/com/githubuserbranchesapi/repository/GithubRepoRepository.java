@@ -10,17 +10,21 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GithubRepoRepository extends Repository<Repo, Long> {
+    //@Query
     List<Repo> findAll(Pageable pageable);
 
+    //@Query
     Optional<Repo> findById(Long id);
 
     @Modifying
-    //@Query("UPDATE
+        //@Query("UPDATE
     void updateById(Long id, Repo newRepo);
 
 
     Repo save(Repo repo);
 
+    @Modifying
+        //@Query
     void deleteById(Long id);
 
     boolean existsById(Long id);

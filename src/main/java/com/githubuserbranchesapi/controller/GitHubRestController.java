@@ -39,7 +39,8 @@ public class GitHubRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<RepoResponseDto> getById(@PathVariable Long id) {
-        RepoResponseDto responseDto = githubService.getById(id);
+        Repo repo = githubService.getById(id);
+        RepoResponseDto responseDto = mapFromRepoToRepoResponseDto(repo);
         return ResponseEntity.ok(responseDto);
     }
 
@@ -50,6 +51,7 @@ public class GitHubRestController {
         CreatedRepoResponseDto responseDto = mapFromRepoToCreatedRepoResponseDto(savedRepo);
         return ResponseEntity.ok(responseDto);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<DeleteRepositoryResponseDto> delete(@PathVariable Long id) {
         githubService.deleteById(id);
@@ -59,11 +61,20 @@ public class GitHubRestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UpdateRepoResponseDto> update(@PathVariable Long id,
-                                                        @RequestBody @Valid UpdateRepoRequestDto request){
+                                                        @RequestBody @Valid UpdateRepoRequestDto request) {
         Repo newRepo = mapFromUpdateRepoRequestDtotoRepo(request);
         githubService.updateById(id, newRepo);
         UpdateRepoResponseDto updateRepoResponseDto = mapFromRepoToUpdateRepoResponseDto(newRepo);
         return ResponseEntity.ok(updateRepoResponseDto);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<PartiallyUpdateRepoResponseDto> partiallyUpdateRepo(@PathVariable Long id,
+                                                                              @RequestBody PartiallyUpdateRepoRequestDto request) {
+        Repo updatedRepo = mapFromartiallyUpdateRepoRequestDtoToRepo(request);
+        Repo repoSaved = githubService.updatePartiallyById(id, updatedRepo);
+        PartiallyUpdateRepoResponseDto partiallyUpdateRepoResponseDto = mapFromRepoToPartiallyUpdateRepoResponseDto(repoSaved);
+        return ResponseEntity.ok(partiallyUpdateRepoResponseDto);
     }
 
 
