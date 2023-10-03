@@ -14,6 +14,6 @@ public class UsernameErrorHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorUsernameResponseDto handleException(UsernameNotFoundException exception) {
         log.warn("UsernameNotFoundException while accessing username");
-        return new ErrorUsernameResponseDto(HttpStatus.NOT_FOUND, "User not found");
+        return new ErrorUsernameResponseDto(HttpStatus.NOT_FOUND, exception.getMessage());
     }
 }

@@ -9,12 +9,13 @@ import java.util.Optional;
 
 public interface GithubRepoRepository extends Repository<Repo, Long>{
     List<Repo> findAll(Pageable pageable);
+    Optional<Repo> findById(Long id);
+
 
     List<Repo> findByOwner(String owner);
 
     List<Repo> findByOwnerAndName(String owner, String name);
 
-    Optional<Repo> findById(Long id);
 
     Repo save(Repo repo);
 

@@ -4,6 +4,9 @@ import com.githubuserbranchesapi.client.GithubProxy;
 import com.githubuserbranchesapi.domain.dto.CreatedRepoResponseDto;
 import com.githubuserbranchesapi.domain.dto.RepoResponseDto;
 import com.githubuserbranchesapi.domain.dto.RequestRepoDto;
+import com.githubuserbranchesapi.domain.model.Repo;
+import com.githubuserbranchesapi.domain.service.RepositoryRetriever;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,14 +18,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/repo")
 @Log4j2
+@AllArgsConstructor
 public class GitHubRestController {
     private final GithubProxy githubClient;
     private final GithubService githubService;
+    private final RepositoryRetriever repositoryRetriever;
 
-    public GitHubRestController(GithubProxy githubClient, GithubService githubservice) {
-        this.githubClient = githubClient;
-        this.githubService = githubservice;
-    }
+
 
     @GetMapping("/username/{userName}")
     public ResponseEntity<List<RepoResponseDto>> getAllRepositoriesNamesByUserName(@PathVariable String userName) {
@@ -34,6 +36,12 @@ public class GitHubRestController {
     public ResponseEntity<List<RepoResponseDto>> getAllRepositories(@PageableDefault(page = 0, size = 10)Pageable pageable){
         List<RepoResponseDto> allRepositories = githubService.getAll(pageable);
         return ResponseEntity.ok(allRepositories);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RepoResponseDto> getById(@PathVariable Long id) {
+        RepoResponseDto responseDto = githubService.getById(id);
+        return ResponseEntity.ok(responseDto);
     }
 
     @PostMapping
