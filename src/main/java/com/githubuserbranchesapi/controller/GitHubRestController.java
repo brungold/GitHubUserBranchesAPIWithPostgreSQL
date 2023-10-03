@@ -7,6 +7,7 @@ import com.githubuserbranchesapi.domain.dto.request.UpdateRepoRequestDto;
 import com.githubuserbranchesapi.domain.dto.response.*;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.domain.service.GithubService;
+import com.githubuserbranchesapi.domain.service.RepositoryAdder;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -27,6 +28,7 @@ import static com.githubuserbranchesapi.domain.service.RepositoryMapper.*;
 public class GitHubRestController {
     private final GithubProxy githubClient;
     private final GithubService githubService;
+    private final RepositoryAdder repositoryAdder;
 
     @GetMapping("/username/{userName}")
     public ResponseEntity<List<RepoResponseDto>> getAllRepositoriesNamesByUserName(@PathVariable String userName) {
@@ -50,7 +52,7 @@ public class GitHubRestController {
     @PostMapping
     public ResponseEntity<CreatedRepoResponseDto> postRepo(@RequestBody CreatedRequestRepoDto requestRepoDto) {
         Repo repo = mapFromCreatedRequestRepoDtoToRepo(requestRepoDto);
-        Repo savedRepo = githubService.addRepo(repo);
+        Repo savedRepo = repositoryAdder.addRepo(repo);
         CreatedRepoResponseDto responseDto = mapFromRepoToCreatedRepoResponseDto(savedRepo);
         return ResponseEntity.ok(responseDto);
     }
