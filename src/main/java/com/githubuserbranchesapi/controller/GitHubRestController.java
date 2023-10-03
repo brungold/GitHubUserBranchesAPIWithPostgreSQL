@@ -6,8 +6,7 @@ import com.githubuserbranchesapi.domain.dto.request.PartiallyUpdateRepoRequestDt
 import com.githubuserbranchesapi.domain.dto.request.UpdateRepoRequestDto;
 import com.githubuserbranchesapi.domain.dto.response.*;
 import com.githubuserbranchesapi.domain.model.Repo;
-import com.githubuserbranchesapi.domain.service.GithubService;
-import com.githubuserbranchesapi.domain.service.RepositoryAdder;
+import com.githubuserbranchesapi.domain.service.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -29,6 +28,9 @@ public class GitHubRestController {
     private final GithubProxy githubClient;
     private final GithubService githubService;
     private final RepositoryAdder repositoryAdder;
+    private final RepositoryRetriever repositoryRetriever;
+    private final RepositoryDeleter repositoryDeleter;
+    private final RepositoryUpdater repositoryUpdater;
 
     @GetMapping("/username/{userName}")
     public ResponseEntity<List<RepoResponseDto>> getAllRepositoriesNamesByUserName(@PathVariable String userName) {
@@ -38,13 +40,13 @@ public class GitHubRestController {
 
     @GetMapping
     public ResponseEntity<List<RepoResponseDto>> getAllRepositories(@PageableDefault(page = 0, size = 10) Pageable pageable) {
-        List<RepoResponseDto> allRepositories = githubService.getAll(pageable);
+        List<RepoResponseDto> allRepositories = repositoryRetriever.getAll(pageable);
         return ResponseEntity.ok(allRepositories);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<RepoResponseDto> getById(@PathVariable Long id) {
-        Repo repo = githubService.getById(id);
+        Repo repo = repositoryRetriever.getById(id);
         RepoResponseDto responseDto = mapFromRepoToRepoResponseDto(repo);
         return ResponseEntity.ok(responseDto);
     }
@@ -59,7 +61,7 @@ public class GitHubRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<DeleteRepositoryResponseDto> delete(@PathVariable Long id) {
-        githubService.deleteById(id);
+        repositoryDeleter.deleteById(id);
         DeleteRepositoryResponseDto deleteDto = mapFromRepoToDeleteRepositoryResponseDto(id);
         return ResponseEntity.ok(deleteDto);
     }
@@ -68,7 +70,7 @@ public class GitHubRestController {
     public ResponseEntity<UpdateRepoResponseDto> update(@PathVariable Long id,
                                                         @RequestBody @Valid UpdateRepoRequestDto request) {
         Repo newRepo = mapFromUpdateRepoRequestDtotoRepo(request);
-        githubService.updateById(id, newRepo);
+        repositoryUpdater.updateById(id, newRepo);
         UpdateRepoResponseDto updateRepoResponseDto = mapFromRepoToUpdateRepoResponseDto(newRepo);
         return ResponseEntity.ok(updateRepoResponseDto);
     }
@@ -77,7 +79,7 @@ public class GitHubRestController {
     public ResponseEntity<PartiallyUpdateRepoResponseDto> partiallyUpdateRepo(@PathVariable Long id,
                                                                               @RequestBody PartiallyUpdateRepoRequestDto request) {
         Repo updatedRepo = mapFromartiallyUpdateRepoRequestDtoToRepo(request);
-        Repo repoSaved = githubService.updatePartiallyById(id, updatedRepo);
+        Repo repoSaved = repositoryUpdater.updatePartiallyById(id, updatedRepo);
         PartiallyUpdateRepoResponseDto partiallyUpdateRepoResponseDto = mapFromRepoToPartiallyUpdateRepoResponseDto(repoSaved);
         return ResponseEntity.ok(partiallyUpdateRepoResponseDto);
     }
