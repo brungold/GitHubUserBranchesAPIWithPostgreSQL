@@ -1,7 +1,7 @@
 package com.githubuserbranchesapi.domain.service;
 
 import com.githubuserbranchesapi.client.BranchInfoResponseDto;
-import com.githubuserbranchesapi.domain.dto.GetGithubBranchResponseDto;
+import com.githubuserbranchesapi.domain.dto.GetBranchResponseDto;
 import com.githubuserbranchesapi.domain.dto.RepositoryResponseDto;
 import com.githubuserbranchesapi.client.GithubProxy;
 import lombok.extern.log4j.Log4j2;
@@ -22,7 +22,7 @@ public class GitHubRestControllerService {
     public List<RepositoryResponseDto> fetchAllRepositoryBranches(String username, List<String> repoNames) {
         return repoNames.stream()
                 .map(repoName -> {
-                    List<GetGithubBranchResponseDto> branches = githubClient.getBranches(username, repoName);
+                    List<GetBranchResponseDto> branches = githubClient.getBranches(username, repoName);
                     List<BranchInfoResponseDto> branchInfoList = branches.stream()
                             .map(branch -> new BranchInfoResponseDto(branch.name(), branch.commit().sha()))
                             .collect(Collectors.toList());

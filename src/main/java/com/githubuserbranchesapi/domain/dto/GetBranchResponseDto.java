@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.githubuserbranchesapi.client.Commit;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record GetGithubBranchResponseDto(String name, Commit commit) {
+public record GetBranchResponseDto(String name, Commit commit) {
 }
