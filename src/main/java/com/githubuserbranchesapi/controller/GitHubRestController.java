@@ -1,7 +1,7 @@
 package com.githubuserbranchesapi.controller;
 
 import com.githubuserbranchesapi.client.GithubProxy;
-import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
+import com.githubuserbranchesapi.controller.error.NotFoundException;
 import com.githubuserbranchesapi.domain.dto.request.CreatedRequestRepoDto;
 import com.githubuserbranchesapi.domain.dto.request.PartiallyUpdateRepoRequestDto;
 import com.githubuserbranchesapi.domain.dto.request.UpdateRepoRequestDto;
@@ -40,7 +40,7 @@ public class GitHubRestController {
         try {
             allRepositoriesByUserName = githubService.getAllRepositoryNames(userName);
         } catch (FeignException ex) {
-            throw new UsernameNotFoundException(userName);
+            throw new NotFoundException(userName);
         }
         return ResponseEntity.ok(allRepositoriesByUserName);
     }

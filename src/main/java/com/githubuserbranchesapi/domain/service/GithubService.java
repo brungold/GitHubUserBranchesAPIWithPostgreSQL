@@ -1,17 +1,15 @@
 package com.githubuserbranchesapi.domain.service;
 
 import com.githubuserbranchesapi.client.GithubProxy;
-import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
+import com.githubuserbranchesapi.controller.error.NotFoundException;
 import com.githubuserbranchesapi.domain.dto.response.GithubRepoResponseDto;
 import com.githubuserbranchesapi.domain.dto.response.RepoResponseDto;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.repository.GithubRepoRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +39,7 @@ public class GithubService {
 
             return requiredResponseList;
         } catch (RuntimeException ex) {
-            throw new UsernameNotFoundException(username);
+            throw new NotFoundException(username);
         }
     }
 }

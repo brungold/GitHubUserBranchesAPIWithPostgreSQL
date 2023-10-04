@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestControllerAdvice(assignableTypes = GitHubRestController.class)
 @Log4j2
-public class UsernameErrorHandler {
-    @ExceptionHandler(UsernameNotFoundException.class)
+public class NotFoundErrorHandler {
+    @ExceptionHandler(NotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorUsernameResponseDto handleException(UsernameNotFoundException exception) {
-        log.warn("UsernameNotFoundException while accessing username");
+    public ErrorUsernameResponseDto handleException(NotFoundException exception) {
+        log.warn("Resource not found");
         return new ErrorUsernameResponseDto(HttpStatus.NOT_FOUND, exception.getMessage());
     }
 }

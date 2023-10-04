@@ -1,6 +1,6 @@
 package com.githubuserbranchesapi.domain.service;
 
-import com.githubuserbranchesapi.controller.error.UsernameNotFoundException;
+import com.githubuserbranchesapi.controller.error.NotFoundException;
 import com.githubuserbranchesapi.domain.dto.response.RepoResponseDto;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.repository.GithubRepoRepository;
@@ -32,13 +32,13 @@ public class RepositoryRetriever {
 
     public Repo getById(Long id){
         return githubRepoRepository.findById(id)
-                .orElseThrow(() -> new UsernameNotFoundException("Repository with id " + id + "not foud"));
+                .orElseThrow(() -> new NotFoundException("Repository with id " + id + "not foud"));
     }
 
 
     public void existsById(Long id) {
         if(!githubRepoRepository.existsById(id)){
-            throw new UsernameNotFoundException("Repository with id " + id + " not found");
+            throw new NotFoundException("Repository with id " + id + " not found");
         }
     }
 }
