@@ -1,6 +1,6 @@
 package com.githubuserbranchesapi.domain.service;
 
-import com.githubuserbranchesapi.controller.error.NotFoundException;
+import com.githubuserbranchesapi.domain.model.NotFoundException;
 import com.githubuserbranchesapi.domain.dto.response.RepoResponseDto;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.repository.GithubRepoRepository;

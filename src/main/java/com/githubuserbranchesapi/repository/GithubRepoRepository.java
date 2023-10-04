@@ -17,7 +17,7 @@ public interface GithubRepoRepository extends Repository<Repo, Long> {
     Optional<Repo> findById(Long id);
 
     @Modifying
-    @Query("DELETE FROM Repo r WHERE r.id =: id")
+    @Query("DELETE FROM Repo r WHERE r.id =:id")
     void deleteById(Long id);
 
     @Modifying

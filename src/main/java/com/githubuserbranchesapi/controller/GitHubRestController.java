@@ -1,7 +1,7 @@
 package com.githubuserbranchesapi.controller;
 
 import com.githubuserbranchesapi.client.GithubProxy;
-import com.githubuserbranchesapi.controller.error.NotFoundException;
+import com.githubuserbranchesapi.domain.model.NotFoundException;
 import com.githubuserbranchesapi.domain.dto.request.CreatedRequestRepoDto;
 import com.githubuserbranchesapi.domain.dto.request.PartiallyUpdateRepoRequestDto;
 import com.githubuserbranchesapi.domain.dto.request.UpdateRepoRequestDto;

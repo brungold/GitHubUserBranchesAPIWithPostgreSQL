@@ -1,8 +1,8 @@
 package com.githubuserbranchesapi.domain.service;
 
 import com.githubuserbranchesapi.client.GithubProxy;
-import com.githubuserbranchesapi.controller.error.NotFoundException;
-import com.githubuserbranchesapi.domain.dto.response.GithubRepoResponseDto;
+import com.githubuserbranchesapi.domain.model.NotFoundException;
+import com.githubuserbranchesapi.client.dto.GithubRepoResponseDto;
 import com.githubuserbranchesapi.domain.dto.response.RepoResponseDto;
 import com.githubuserbranchesapi.domain.model.Repo;
 import com.githubuserbranchesapi.repository.GithubRepoRepository;
@@ -29,7 +29,7 @@ public class GithubService {
             List<RepoResponseDto> requiredResponseList = allUserRepositories.stream()
                     .map(repoDto -> {
                         //Zapisuje  informacje o repozytorium do bazy danych
-                        Repo repo = new Repo(repoDto.owner().login(), repoDto.login());
+                        Repo repo = new Repo(repoDto.owner().login(), repoDto.name());
                         Repo savedRepo = githubRepoRepository.save(repo);
 
                         //Tworze RequiredResponseDto na podstawie danych zapisanych w bazie danych
