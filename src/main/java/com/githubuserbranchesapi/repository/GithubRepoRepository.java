@@ -21,7 +21,7 @@ public interface GithubRepoRepository extends Repository<Repo, Long> {
     void deleteById(Long id);
 
     @Modifying
-    @Query("UPDATE Repo r SET r.owner = :#{#newRepo.owner}, r.name = :#{newRepo.name} WHERE r.id = :id")
+    @Query("UPDATE Repo r SET r.owner = :#{#newRepo.owner}, r.name = :#{#newRepo.name} WHERE r.id = :id")
     void updateById(Long id, Repo newRepo);
 
 

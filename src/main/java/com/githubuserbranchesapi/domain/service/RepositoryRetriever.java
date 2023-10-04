@@ -20,7 +20,7 @@ public class RepositoryRetriever {
         this.githubRepoRepository = githubRepoRepository;
     }
 
-    public List<RepoResponseDto> getAll(Pageable pageable){
+    public List<RepoResponseDto> getAll(Pageable pageable) {
         log.info("Retrieving all song: ");
         List<Repo> allRepo = githubRepoRepository.findAll(pageable);
         List<RepoResponseDto> dto = new ArrayList<>();
@@ -30,14 +30,14 @@ public class RepositoryRetriever {
         return dto;
     }
 
-    public Repo getById(Long id){
+    public Repo getById(Long id) {
         return githubRepoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Repository with id " + id + "not foud"));
     }
 
 
     public void existsById(Long id) {
-        if(!githubRepoRepository.existsById(id)){
+        if (!githubRepoRepository.existsById(id)) {
             throw new NotFoundException("Repository with id " + id + " not found");
         }
     }
