@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
 @Builder
 @Entity
 @Getter
@@ -22,7 +23,8 @@ public class Repo {
 
     @NotNull
     String name;
-    public Repo(){
+
+    public Repo() {
 
     }
 

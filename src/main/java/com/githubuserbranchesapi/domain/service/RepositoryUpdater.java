@@ -22,22 +22,35 @@ public class RepositoryUpdater {
         githubRepoRepository.existsById(id);
         githubRepoRepository.updateById(id, newRepo);
     }
-
     public Repo updatePartiallyById(Long id, Repo repoFromRequest){
         Repo repoFromDatabase = repositoryRetriever.getById(id);
-        Repo.RepoBuilder builder = Repo.builder();
+
         if (repoFromRequest.getName() != null){
-            builder.name(repoFromRequest.getName());
-        } else {
-            builder.name(repoFromDatabase.getName());
+            repoFromDatabase.setName(repoFromRequest.getName());
         }
         if (repoFromRequest.getOwner() != null){
-            builder.name(repoFromRequest.getOwner());
-        } else {
-            builder.name(repoFromDatabase.getOwner());
+            repoFromDatabase.setOwner(repoFromRequest.getOwner());
         }
-        Repo toSave = builder.build();
-        updateById(id, toSave);
-        return toSave;
+
+        return githubRepoRepository.save(repoFromDatabase);
     }
+
+//    public Repo updatePartiallyById(Long id, Repo repoFromRequest){
+//        Repo repoFromDatabase = repositoryRetriever.getById(id);
+//        Repo.RepoBuilder builder = Repo.builder();
+//        if (repoFromRequest.getName() != null){
+//            builder.name(repoFromRequest.getName());
+//        } else {
+//            builder.name(repoFromDatabase.getName());
+//        }
+//        if (repoFromRequest.getOwner() != null){
+//            builder.name(repoFromRequest.getOwner());
+//        } else {
+//            builder.name(repoFromDatabase.getOwner());
+//        }
+//        Repo toSave = builder.build();
+//        updateById(id, toSave);
+//        return toSave;
+//    }
+
 }
