@@ -32,7 +32,7 @@ public class RepositoryRetriever {
 
     public Repo getById(Long id) {
         return githubRepoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Repository with id " + id + "not foud"));
+                .orElseThrow(() -> new NotFoundException("Repository with id " + id + " not foud"));
     }
 
 
