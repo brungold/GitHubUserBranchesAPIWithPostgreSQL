@@ -1,6 +1,5 @@
 package com.githubuserbranchesapi.controller;
 
-import com.githubuserbranchesapi.client.GithubProxy;
 import com.githubuserbranchesapi.controller.error.NotFoundException;
 import com.githubuserbranchesapi.domain.dto.request.CreatedRequestRepoDto;
 import com.githubuserbranchesapi.domain.dto.request.PartiallyUpdateRepoRequestDto;
@@ -27,7 +26,6 @@ import static com.githubuserbranchesapi.domain.service.RepositoryMapper.*;
 @Log4j2
 @AllArgsConstructor
 public class GitHubRestController {
-    private final GithubProxy githubClient;
     private final GithubService githubService;
     private final RepositoryAdder repositoryAdder;
     private final RepositoryRetriever repositoryRetriever;
