@@ -5,7 +5,8 @@ This project uses the Feign library for communicating with the GitHub API and en
 
 
 Technologies
- The project utilizes the following technologies and libraries:
+
+The project utilizes the following technologies and libraries:
 
 -Spring Boot
 
