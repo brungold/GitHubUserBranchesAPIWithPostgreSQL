@@ -22,17 +22,13 @@ public class GithubService {
 
     public List<RepoResponseDto> getAllRepositoryNames(String username) {
         try {
-            //Pobieram listę repozytoriów użytkownika z API GitHub
             List<GithubRepoResponseDto> allUserRepositories = githubClient.getUserRepos(username);
 
-            //Przetwarzamdane i zapisz je do bazy danych oraz zwróć listę RequiredResponseDto
             List<RepoResponseDto> requiredResponseList = allUserRepositories.stream()
                     .map(repoDto -> {
-                        //Zapisuje  informacje o repozytorium do bazy danych
                         Repo repo = new Repo(repoDto.owner().login(), repoDto.name());
                         Repo savedRepo = githubRepoRepository.save(repo);
 
-                        //Tworze RequiredResponseDto na podstawie danych zapisanych w bazie danych
                         return new RepoResponseDto(savedRepo.getId(), savedRepo.getOwner(), savedRepo.getName());
                     })
                     .collect(Collectors.toList());
