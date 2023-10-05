@@ -1,4 +1,4 @@
-package com.githubuserbranchesapi.domain.model;
+package com.githubuserbranchesapi.controller.error;
 
 
 public class NotFoundException extends RuntimeException {
