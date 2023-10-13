@@ -34,7 +34,7 @@ public class GithubService {
                     .collect(Collectors.toList());
 
             return requiredResponseList;
-        } catch (RuntimeException ex) {
+        } catch (NotFoundException ex) {
             throw new NotFoundException(username);
         }
     }
